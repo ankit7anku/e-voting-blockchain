@@ -1,0 +1,94 @@
+<!--<h1>{{ result }}</h1>-->
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    {% if title %}
+        <title>electo.ai - {{ title }}</title>
+    {% else %}
+        <title>electo.ai</title>
+    {% endif %}
+<script>
+window.onload = function () {
+
+var Bcount = {{ result['bjp'] }};
+var Acount = {{ result['aap'] }};
+var Ccount = {{ result['con'] }};
+var Ncount = {{ result['no'] }};
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	exportFileName: "Doughnut Chart",
+	exportEnabled: true,
+	animationEnabled: true,
+	title:{
+		text: "CURRENT RESULT"
+
+	},
+	legend:{
+		cursor: "pointer",
+		itemclick: explodePie
+	},
+	data: [{
+		type: "doughnut",
+		innerRadius: 75,
+		showInLegend: true,
+		toolTipContent: "<b>{name}</b>: {y} (#percent%)",
+		indexLabel: "{name} - #percent%",
+		dataPoints: [
+			{ y: Bcount, name: "BJP" },
+			{ y: Ccount, name: "INC" },
+			{ y: Acount, name: "AAP" },
+			{ y: Ncount, name: "None" }
+		]
+	}]
+});
+chart.render();
+
+function explodePie (e) {
+	if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+		e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+	} else {
+		e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+	}
+	e.chart.render();
+}
+
+}
+</script>
+</head>
+<body>
+	<header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-info fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4 lead" href="/">electo.ai</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link lead border-left pl-4" href="{{ url_for('home') }}">Home</a>
+              <a class="nav-item nav-link lead" href="{{ url_for('about') }}">About</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a href="{{ url_for('voter_login') }}" class = "nav-item nav-link lead border-left border-right  pr-4 pl-4"> Vote</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+	<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 100px auto;"></div>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

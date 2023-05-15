@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<form action="http://localhost:5000/profile" method="post">
+<p class = "lead" >Whom do you want to vote for ?</p>
+<div class = "content-section" style = "text-align: center;">
+
+<div class="custom-control custom-radio  text-left">
+	<div style="background-image: url(../static/sym1.jpg)"></div>
+	<input type="radio" class="custom-control-input" id="vradio1" name="candidate" value="CONGRESS">
+	<label class="custom-control-label" for="vradio1"> Indian National Congress</label>
+</div> 
+
+<div class="custom-control custom-radio  text-left">
+	<div style="background-image: url(../static/sym2.jpg)"></div>
+	<input type="radio" class="custom-control-input" id="vradio2" name="candidate" value="BJP">
+	<label class="custom-control-label" for="vradio2"> Bhartiya Janta Party</label>
+</div> 
+
+<div class="custom-control custom-radio text-left">
+	<div style="background-image: url(../static/sym3.jpg)"></div>
+	<input type="radio" class="custom-control-input" id="vradio3" name="candidate" value="AAP">
+	<label class="custom-control-label" for="vradio3"> Aam Aadmi Party</label>
+</div> 
+
+
+<div class="custom-control custom-radio  text-left">
+	<div style="background-image: url(../static/sym4.jpg)"></div>
+	<input type="radio" class="custom-control-input" id="vradio4" name="candidate" value="NONE" checked>
+	<label class="custom-control-label" for="vradio4"> None</label>
+</div>
+
+<br/>
+<br/>
+<br/>
+<input class = "btn btn-info pl-3 pr-3" type="submit" value="Vote">
+</div>
+</form>
+
+{% endblock %}

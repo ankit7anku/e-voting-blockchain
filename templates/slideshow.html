@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Slideshow</title>
+	<style>
+		.slideshow {
+			position: relative;
+			width: 100%;
+			height: 400px;
+			overflow: hidden;
+		}
+		.slideshow .slides {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			transition: transform 0.5s ease-in-out;
+		}
+		.slideshow .slides .slide {
+			flex: 0 0 33.33%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #ccc;
+		}
+		.slideshow .slides .slide:nth-child(1) {
+			background-color: red;
+		}
+		.slideshow .slides .slide:nth-child(2) {
+			background-color: green;
+		}
+		.slideshow .slides .slide:nth-child(3) {
+			background-color: blue;
+		}
+		.slideshow .controls {
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 20px;
+		}
+		.slideshow .controls button {
+			margin: 0 5px;
+			padding: 5px 10px;
+			background-color: #fff;
+			border: none;
+			cursor: pointer;
+			transition: background-color 0.2s ease-in-out;
+		}
+		.slideshow .controls button:hover {
+			background-color: #f5f5f5;
+		}
+	</style>
+</head>
+<body>
+	<div class="slideshow">
+		<div class="slides">
+			<div class="slide">Slide 1</div>
+			<div class="slide">Slide 2</div>
+			<div class="slide">Slide 3</div>
+			<div class="slide">Slide 4</div>
+			<div class="slide">Slide 5</div>
+			<div class="slide">Slide 6</div>
+			<div class="slide">Slide 7</div>
+			<div class="slide">Slide 8</div>
+			<div class="slide">Slide 9</div>
+		</div>
+		<div class="controls">
+			<button class="prev">Prev</button>
+			<button class="next">Next</button>
+		</div>
+	</div>
+	<script>
+		const slideshow = document.querySelector('.slideshow');
+		const slides = document.querySelector('.slides');
+		const slideCount = slides.children.length;
+		const prevBtn = document.querySelector('.prev');
+		const nextBtn = document.querySelector('.next');
+		let currentIndex = 0;
+		
+		function goToSlide(index) {
+			slides.style.transform = `translateX(-${index * 33.33}%)`;
+			currentIndex = index;
+			updateButtons();
+		}
+		
+		function updateButtons() {
+			if (currentIndex === 0) {
+				prevBtn.disabled = true;
+			} else {
+				prevBtn.disabled = false;
+			}
+			if (currentIndex === slideCount - 3) {
+				nextBtn.disabled = true;
+			} else {
+				next

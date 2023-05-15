@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <h1> Electo.ai </h1>
+    <p class = "lead">A secure online voting platform</p>
+    <br/>
+
+    <div class = "container content-section p-4 d-flex justify-content-center">
+    <a href="{{ url_for('generate') }}" class = "list-group-item list-group-item-light list-group-action m-2"><button class = "btn btn-info p-2 d-flex">Generate secure passcode</button></a>
+    <a href="{{ url_for('voter_login') }}" class = "list-group-item list-group-item-light list-group-action m-2"><button class = "btn btn-outline-info d-flex p-2 pl-5 pr-5">Register your vote</button></a>
+  </div>
+
+  {% for post in posts %} 
+    <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ post.author }}</a>
+            <small class="text-muted">{{ post.date_posted }}</small>
+          </div>
+          <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+          <p class="article-content">{{ post.content }}</p>
+        </div>
+      </article>
+  {% endfor %}
+{% endblock %}

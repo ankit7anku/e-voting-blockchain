@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "layout.html" %}
+{% block content %}
+<h1 class = "mt-5">Generate secure passcode</h1>
+<p class = "lead"><span class = "text-info">The passcode is generated using SHA256 encryption.</span> So, your identity is secure</p>
+
+<form class = "mt-5" method="post" action="http://localhost:5000/generate">
+    <div class="form-group" style = "text-align: center;">
+        <input class = "form-control form-control-md mb -4" placeholder="Voter ID" type="text" name="ID">
+        <br/>
+        <input class = "btn btn-info" type="submit" value="Generate Secure Passcode">
+    </div>
+</form>
+
+    {% if cond == True %}
+    {% for key, value in result.items() %}
+    <div class = "content-section">
+        <p  class = "lead"><span class = "text-info">Your Public Key :</span> {{ key }}</p>
+        <p  class = "lead"><span class = "text-info">Your Private Key:</span> {{ value[0] }}</p>
+        <p  class = "lead">You have {{ value[1] }} chance to cast your vote</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+{% endblock %}
